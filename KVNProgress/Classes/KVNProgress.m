@@ -368,12 +368,14 @@ static KVNProgressConfiguration *configuration;
 		
 		if (delay > 0) {
 			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-				if (KVNBlockSelf.state == KVNProgressStateDismissing || ![KVNBlockSelf.class isVisible]) {
+				if (KVNBlockSelf.state == KVNProgressStateDismissing || KVNBlockSelf.superview == nil) {
 					// While waiting for displaying previous HUD enough time before showing the new one,
 					// the dismiss method on this new HUD has already been called
 					// So logically, we do not display the new HUD that is already dismissed (before even being displayed)
 					return;
 				}
+                
+                KVNBlockSelf.alpha = 0.1f;
 				
 				[KVNBlockSelf showProgress:progress
 									status:status
