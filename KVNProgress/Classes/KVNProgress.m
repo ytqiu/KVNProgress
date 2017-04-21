@@ -375,7 +375,7 @@ static KVNProgressConfiguration *configuration;
 					return;
 				}
                 
-                KVNBlockSelf.alpha = 0.1f;
+                KVNBlockSelf.alpha = 1.0f;
 				
 				[KVNBlockSelf showProgress:progress
 									status:status
